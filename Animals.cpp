@@ -11,12 +11,14 @@ Animal::Animal(animals type, int i){
 	case chicken: 
 			_procreate = 10;
 			_dying = 2;
-			setProductiveness(20,40,i); //jajka
+			if (_sex == 1) setProductiveness(20,40,i); //jajka
+			else setProductiveness(0,0,i);
 			break;
 		case cow: 
 			_procreate = 1;
 			_dying = 5;
-			setProductiveness(40,80,i); //mleko
+			if (_sex == 1) setProductiveness(40,80,i); //mleko
+			else setProductiveness(0,0,i);
 			break;
 		case pig: 
 			_procreate = 2;
@@ -53,7 +55,8 @@ Animal::Animal(int proc, int die, int prod_x, int prod_y, int i){
 
 void Animal::setProductiveness(int x, int y, int i){
 	srand(time(NULL) + i);
-	_productiveness = (rand()*(i+1))%(y-x) + x;
+	if (y!=0 && x!= 0) _productiveness = (rand()*(i+1))%(y-x) + x;
+	else _productiveness = 0;
 }
 
 bool Animal::ageing(){
