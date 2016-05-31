@@ -24,6 +24,10 @@ class Herd{
 		void add(Animal * new_ones[], int n); //dodaj DUŻO nowych
 		
 		int assets(); //zwraca laczna liczbe produkowanych rzeczy przez stado
+		double money(); //zwraca liczbe pieniedzy, którą się zaorbiło na całym stadzie przez rok minus koszt utrzymania
+
+		double sell(int n=1); //sprzedaje n zwierzat (losowych)
+		double sell_all(); // sprzedaje wszystko
 		
 		void procreation();//rozmnazanie - dodaje nowe obiekty do wektora
 		

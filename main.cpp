@@ -17,26 +17,32 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	int rozmiar = 10;
-	Animal * tab[rozmiar]; //tablica wskaźników swiń
+	int rozmiar = 3;
+	Animal * tab[rozmiar]; //tablica wskaźników
 	
-	for (int i = 0; i < rozmiar; i++){
+	for (int i = 0; i < rozmiar; i++){ 
 		Animal * pAnimal = new Animal(cow, i); 
 		tab[i] = pAnimal;
-	}
+	} 
 	
 	Herd cows(tab, rozmiar); 
-	
+	double money = 10000;   
+
 	cout << cows << endl; 
-	for (int i = 0; i < 15; i++){
+	money += cows.money(); 
+	cout << "Pieniazki gospodarstwa: " << money << endl << endl;   
+	for (int i = 0; i < 15; i++){ 
 		cout << "Rok: " << i+1 << endl;
 		cows.obsolescence(); //usun stare
 		cows.procreation(); //rozmnoz mlode
 		cows.attack(2); //atak lisa czy czegos :p
-		cout << cows << endl << endl;
+		money += cows.sell(); //sprzedaje jedna losowa krowe
+		money += cows.money(); //zwraca przychody minus koszty utrzymania
+		cout << cows << endl; 
+		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  
 	}
-	
-	//cout << pigs << endl; 
+	cows.sell_all();
+	cout << cows << endl << endl;
 	
 	
 	return 0;

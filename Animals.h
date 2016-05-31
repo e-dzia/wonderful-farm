@@ -14,10 +14,15 @@ class Animal{
 		int _age; //wiek konkretnego zwierzecia
 		bool _sex; //plec konkretnego zwierzecia 0 - male, 1 - female
 		void setProductiveness(int x, int y, int i = 0); //ustawia produktywnosc na losowa wartosc z zadanego przedzialu (x,y)
+		double _buy_price; //cena kupna
+		double _sell_price; //cena sprzedazy
+		double _costs; //koszt utrzymania roczny
+		double _prod_price; //cena za jedną produktywność (np. jedno jajko)
+
 		
 	public:
 		Animal(animals type, int i=0); // konstruktor - losuje plec, ustawia wiek na zero
-		Animal(int proc, int die, int prod_x, int prod_y, int i = 0); //konstruktor dla psa
+		Animal(int proc, int die, int prod_x, int prod_y, double buy, double sell, double cost, double prodp, int i = 0); //konstruktor dla psa
 		
 		//gettery:
 		int age() {return _age;};
@@ -26,9 +31,12 @@ class Animal{
 		int productiveness() {return _productiveness;};
 		int procreate(){return _procreate;};
 		int dying(){return _dying;};
+		double prod_price(){return _prod_price;};
+		double costs(){return _costs;};
+		double buy(){return _buy_price;};
+		double sell(){return _sell_price;};  
 		
 		bool ageing(); //starzenie zwierzaka, zwieksza wiek zwierzaka o 1, zwraca true jesli jest ok i false jesli ma umrzec
-		//w aging mozna potem dodac zmiane produktywnosci wraz ze starzeniem
 		
 
 		
@@ -36,7 +44,9 @@ class Animal{
 
 class Dog: public Animal{
 	private:
-		int _attacks_protected; //zerowana z poczatkiem kazdego roku
+		int _attacks_protected; //zerowana z poczatkiem kazdego roku?
 	public:
-		Dog(int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
+		Dog(int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10, double buy = 800, double sell = 500, double cost = 500, double prodp = 0);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
+
+		bool protect(); //jesli moze obronic, to zwraca true i zwieksza liczbe obronionych o 1
 };

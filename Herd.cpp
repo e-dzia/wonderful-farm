@@ -102,6 +102,38 @@ int Herd::assets(){
 	return sum;
 }
 
+double Herd::money(){
+	if (_vecAnimals.size()==0) return 0;
+	if (_vecAnimals.back()->type()!=pig){
+		double sum = assets()*(_vecAnimals.back()->prod_price()) - (_vecAnimals.back()->costs())*size();
+		return sum;
+	}
+	return 0;
+}
+
+double Herd::sell(int n){
+	if (n >= _vecAnimals.size())
+		sell_all();
+	else {
+		double sum = 0;
+		for (int i = 0; i < n; i++){
+			int random = rand()%(_vecAnimals.size());
+			sum += _vecAnimals[i]->sell();
+			_vecAnimals.erase(_vecAnimals.begin()+random);
+		}
+	}
+}
+
+double Herd::sell_all(){
+	if (_vecAnimals.size()==0) return 0;
+	double sum = 0;
+	for (int i = 0; i < _vecAnimals.size(); i++){
+		sum += _vecAnimals[i]->sell();
+	}
+	_vecAnimals.clear();
+	return sum;
+}
+
 void Herd::procreation(){
 	if (size()==0) return;
 	int male = males() - males(0);
@@ -145,7 +177,7 @@ ostream & operator<<(ostream &os, Herd & h){
 	os << "Rozmiar stada: " << h.size() << endl
 	   << "Samice: " << h.females() << endl
 	   << "Samce: " << h.males() << endl
-	   << "Produktywnosc laczna: " << h.assets() << endl
+	   << "Pieniazki: " << h.money() << endl
 	   //<< "Staruszki (gina w nastepnej rundzie): " << h.size(h[h.size()-1]->dying()-1)
 	   ;
 	return os;
