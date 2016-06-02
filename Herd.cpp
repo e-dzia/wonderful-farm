@@ -73,6 +73,7 @@ void Herd::obsolescence(){
 }
 
 void Herd::attack(int n){
+	if (size()==0) return;
 	if (n >= _vecAnimals.size())
 		_vecAnimals.clear();
 	else {
