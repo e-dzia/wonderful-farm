@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	Animal * tab[rozmiar]; //tablica wskaźników 
 	
 	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Dog(i); //new Animal(dog,i) zadziała tak samo jak coś
+		Animal * pAnimal = new Dog(i);
 		tab[i] = pAnimal; 
 	} 
 	Herd dogs(tab, rozmiar);
