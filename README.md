@@ -1,3 +1,5 @@
 # Wonderful Farm
 
+(To jeszcze nie koniec projektu. Tak jakby co.)
+
 Projekt Wonderful Farm będzie przedstawiał symulację farmy. Wonderful Farm, jak każda szanująca się farma, posiada stada zwierząt. Użytkownik wciela się w postać gospodarza i może podejmować różne decyzje, które wpłyną na rozgrywkę. Rozgrywka podzielona jest na rundy. W każdej z nich można podjąć decyzję o zakupie lub sprzedaży zwierząt. Możliwe do wyboru zwierzęta to kury, krowy, świnie, owce, konie, króliki (które służą jako pożywienie dla psa), psy do obrony przed napastnikami (oprócz nietoperzy). Każde z tych zwierząt ma swojego naturalnego wroga: kuny, lisy, wilki, wioskowe złodziejaszki, stado nietoperzy jedzących krowy (naprawdę takie istnieją). Zwierzęta rozmnażają się w prawdopodobnym tempie i mają rozróżnialną płeć (dwóch samców/dwie samice nie wyprodukują potomka, nawet jakby się bardzo starali).
