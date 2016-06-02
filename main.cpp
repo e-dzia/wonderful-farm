@@ -26,7 +26,6 @@ int main(int argc, char** argv)
 		Animal * pAnimal = new Dog(i); //new Animal(dog,i) zadziała tak samo jak coś
 		tab[i] = pAnimal; 
 	} 
-	
 	Herd dogs(tab, rozmiar);
 	Herd cows;
 	Herd rabbits;
@@ -49,7 +48,6 @@ int main(int argc, char** argv)
 		money += cows.money(); //zwraca przychody minus koszty utrzymania
 		cout << cows << endl; 
 		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  
-		cows[0]->protect(5);
 	}
 	cows.sell_all();
 	cout << cows << endl << endl;
@@ -70,7 +68,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	pilferer = rand()%4;
 	int random = 1;
 
-	if(random == marten)
+	if(random == marten && rabbits.size()>0)
 	{
 		kills = ((rand()%10)+3) - dogs[0]->productiveness();
 		rabbits.attack(kills);
@@ -84,7 +82,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		}
 	}
 
-	if(random == bat)
+	if(random == bat && cows.size()>0)
 	{
 		kills = (rand()%5)+1;
 		cows.attack(kills);
@@ -92,7 +90,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		cout << "Przyleciały krwiożercze nietoperze. Wyssały krew z " << kills << " Twoich krów." << endl ;
 	}
 
-	if(random == wolf)
+	if(random == wolf && pigs.size()>0)
 	{
 		kills = ((rand()%5)+1) - dogs[0]->productiveness();
 		pigs.attack(kills);
@@ -111,7 +109,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		int n;
 		n = rand()%2;
 
-		if(n == 0) //Lis je owce
+		if(n == 0 && sheeps.size()>0) //Lis je owce
 		{
 			kills = ((rand()%7)+1) - dogs[0]->productiveness();
 			sheeps.attack(kills); // przepraszam jeszcze raz xD
@@ -125,7 +123,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			}
 		}
 
-		if(n == 1) // Lis je kury
+		if(n == 1 && chickens.size()>0) // Lis je kury
 		{
 			kills = ((rand()%7)+1) - dogs[0]->productiveness();
 			chickens.attack(kills);
@@ -144,7 +142,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	{
 		int n = (rand()%6)+1 ;
 	
-		if(n==1)
+		if(n==1 && rabbits.size()>0)
 		{
 			kills = ((rand()%10)+3);
 			rabbits.attack(kills);
@@ -152,7 +150,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " królików." ;
 		}
 
-		if(n==2)
+		if(n==2 && cows.size()>0)
 		{
 			kills = (rand()%5)+1;
 			cows.attack(kills);
@@ -160,7 +158,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " krów." ;
 		}
 
-		if(n==3)
+		if(n==3 && pigs.size()>0)
 		{	
 			kills = (rand()%5)+1;
 			pigs.attack(kills);
@@ -168,7 +166,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " świń." ;
 		}
 
-		if(n==4)
+		if(n==4 && sheeps.size()>0)
 		{
 			kills = (rand()%7)+1;
 			sheeps.attack(kills);
@@ -176,7 +174,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " owiec." ;
 		}
 
-		if(n==5)
+		if(n==5 && chickens.size()>0)
 		{
 			kills = (rand()%7)+1;
 			chickens.attack(kills);
@@ -184,7 +182,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " owiec." ;
 		}
 
-		if(n==6)
+		if(n==6 && horses.size()>0)
 		{
 			horses.attack(1);
 

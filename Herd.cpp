@@ -114,6 +114,7 @@ double Herd::money(){
 }
 
 double Herd::sell(int n){
+	if (size()==0) return 0;
 	if (n >= _vecAnimals.size())
 		sell_all();
 	else {
@@ -140,7 +141,7 @@ void Herd::procreation(){
 	if (size()==0) return;
 	int male = males() - males(0) - males(1) - males(2);
 	int female = females()  - females(0) - females(1);
-	int min = (male < female? male: female)*_vecAnimals.back()->procreate();
+	int min = (male < female ? male: female)*_vecAnimals.back()->procreate();
 	if (min == 0) return;
 	Animal * tab[min];
 	for (int i = 0; i < min; i++){
