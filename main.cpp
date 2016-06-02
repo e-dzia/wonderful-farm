@@ -27,7 +27,12 @@ int main(int argc, char** argv)
 		tab[i] = pAnimal; 
 	} 
 	Herd dogs(tab, rozmiar);
-	Herd cows;
+	rozmiar = 5;
+	for (int i = 0; i < rozmiar; i++){ 
+		Animal * pAnimal = new Animal(cow,i);
+		tab[i] = pAnimal; 
+	} 
+	Herd cows (tab,rozmiar);
 	Herd rabbits;
 	Herd sheeps; //liczba mnoga od sheep to ... sheep, ale inaczej nie zadziała, przepraszam XD
 	Herd chickens;
@@ -44,7 +49,7 @@ int main(int argc, char** argv)
 		cows.obsolescence(); //usun stare
 		cows.procreation(); //rozmnoz mlode
 		randomIncidents(dogs, cows, rabbits, sheeps, chickens, horses, pigs);
-		money += cows.sell(); //sprzedaje jedna losowa krowe
+		//money += cows.sell(); //sprzedaje jedna losowa krowe
 		money += cows.money(); //zwraca przychody minus koszty utrzymania
 		cout << cows << endl; 
 		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  

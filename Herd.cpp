@@ -183,7 +183,7 @@ ostream & operator<<(ostream &os, Herd & h){
 	os << "Rozmiar stada: " << h.size() << endl
 	   << "Samice: " << h.females() << endl
 	   << "Samce: " << h.males() << endl
-	   << "Pieniazki: " << h.money() << endl
+	   //<< "Pieniazki: " << h.money() << endl
 	   //<< "Staruszki (gina w nastepnej rundzie): " << h.size(h[h.size()-1]->dying()-1)
 	   ;
 	return os;
