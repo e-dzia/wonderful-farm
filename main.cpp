@@ -130,7 +130,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			kills = ((rand()%7)+1) - dogs[0]->productiveness();
 			chickens.attack(kills);
 
-			cout << "W nocy przybiegł lis chytrusek i zjadł Twoje kury tak, że zostało ich tylko " << kills << "." ;
+			cout << "W nocy przybiegł lis chytrusek i zjadł " << kills << " Twoich kur." ;
 	
 		if(!dogs[0]->protect())
 			{
