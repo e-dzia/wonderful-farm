@@ -2,7 +2,7 @@
 //nagłówki wszytskich zwierzakow
 
 enum animals {
-	chicken = 0, cow = 1, pig = 2, sheep = 3, horse = 4, rabbit = 5
+	chicken = 0, cow = 1, pig = 2, sheep = 3, horse = 4, rabbit = 5, dog = 6
 };
 
 class Animal{
@@ -36,7 +36,8 @@ class Animal{
 		double buy(){return _buy_price;};
 		double sell(){return _sell_price;};  
 		
-		bool ageing(); //starzenie zwierzaka, zwieksza wiek zwierzaka o 1, zwraca true jesli jest ok i false jesli ma umrzec
+		virtual bool ageing(); //starzenie zwierzaka, zwieksza wiek zwierzaka o 1, zwraca true jesli jest ok i false jesli ma umrzec
+		virtual bool protect(int n = 1);
 		
 
 		
@@ -46,7 +47,8 @@ class Dog: public Animal{
 	private:
 		int _attacks_protected; //zerowana z poczatkiem kazdego roku?
 	public:
-		Dog(int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10, double buy = 800, double sell = 500, double cost = 500, double prodp = 0);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
+		Dog(int i = 0, int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10, double buy = 800, double sell = 500, double cost = 400, double prodp = 0);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
 
-		bool protect(); //jesli moze obronic, to zwraca true i zwieksza liczbe obronionych o 1
+		bool protect(int n = 1); //jesli moze obronic, to zwraca true i zwieksza liczbe obronionych o 1
+		bool ageing();
 };

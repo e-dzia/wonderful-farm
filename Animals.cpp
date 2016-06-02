@@ -65,6 +65,15 @@ Animal::Animal(animals type, int i){
 			_prod_price = 0;
 			setProductiveness(0,0);
 			break;
+		case dog:
+			_procreate = 1;
+			_dying = 15;
+			_buy_price = 800; 
+			_sell_price = 500; 
+			_costs = 400; 
+			_prod_price = 0;
+			setProductiveness(2,10);
+			break;
 	}
 	
 }
@@ -80,6 +89,7 @@ Animal::Animal(int proc, int die, int prod_x, int prod_y, double buy, double sel
 	_costs = cost; 
 	_prod_price = prodp;
 	setProductiveness(prod_x, prod_y);
+	_type = dog;
 }
 
 void Animal::setProductiveness(int x, int y, int i){
@@ -95,15 +105,21 @@ bool Animal::ageing(){
 	else return true;
 }
 
-Dog::Dog(int proc, int die, int prod_x, int prod_y, double buy, double sell, double cost, double prodp)
-:Animal(proc, die, prod_x, prod_y, buy, sell, cost, prodp)
+Dog::Dog(int i, int proc, int die, int prod_x, int prod_y, double buy, double sell, double cost, double prodp)
+:Animal(proc, die, prod_x, prod_y, buy, sell, cost, prodp, i)
 {
 	_attacks_protected = 0;
 }
 
+bool Animal::protect(int n){}
 
-bool Dog::protect(){
-	_attacks_protected++;
+bool Dog::protect(int n){
+	_attacks_protected += n;
 	if (_attacks_protected > productiveness()) return false;
 	else return true;
+}
+
+bool Dog::ageing(){
+	_attacks_protected = 0;
+	return Animal::ageing();
 }

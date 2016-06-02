@@ -136,8 +136,8 @@ double Herd::sell_all(){
 
 void Herd::procreation(){
 	if (size()==0) return;
-	int male = males() - males(0);
-	int female = females()  - females(0);
+	int male = males() - males(0) - males(1) - males(2);
+	int female = females()  - females(0) - females(1);
 	int min = (male < female? male: female)*_vecAnimals.back()->procreate();
 	if (min == 0) return;
 	Animal * tab[min];
@@ -172,6 +172,9 @@ ostream & operator<<(ostream &os, Herd & h){
 			break;
 		case rabbit:
 			os << "Stado krolikow.\n";
+			break;
+		case dog: 
+			os << "Stado psow. Hau hau!\n";
 			break;
 	}
 	os << "Rozmiar stada: " << h.size() << endl

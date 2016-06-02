@@ -7,7 +7,7 @@
 /*
 - uzytkownik wybiera liczbe lat symulacji
 - menu do podejmowania decyzji w sprawie farmy (co chce kupic/sprzedac)
-- petla do 4*liczba_lat, w kazdym obrocie powiekszaja sie stada, mozna sprzedawac zwierzeta/produkty, kupować zwierzeta. Przy kazdym obrocie musi
+- petla do liczba_lat, w kazdym obrocie powiekszaja sie stada, mozna sprzedawac zwierzeta/produkty, kupować zwierzeta. Przy kazdym obrocie musi
 wyswietlac sie info: ile jakich zwierzat i jakiej plci ma uzytkownik, ile roslin, ile ma hajsu i czy ktos atakowal jego zwierzeta albo ukradł :p
 - w każdym obrocie mogą zdarzyć się zdarzenia losowe - drapieżnik/złodziej -> usuwa losowe osobniki i wyswietla info, że zabrał kilka osobnikow
 - zwierzeta przechowywane sa w vectorze (lepiej niz w kolejce, bo mozna usuwac srodkowe elementy tez)
@@ -17,15 +17,15 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	int rozmiar = 3;
-	Animal * tab[rozmiar]; //tablica wskaźników
+	int rozmiar = 13;
+	Animal * tab[rozmiar]; //tablica wskaźników 
 	
 	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Animal(cow, i); 
-		tab[i] = pAnimal;
+		Animal * pAnimal = new Dog(i); //new Animal(dog,i) zadziała tak samo jak coś
+		tab[i] = pAnimal; 
 	} 
 	
-	Herd cows(tab, rozmiar); 
+	Herd cows(tab, rozmiar); //chwilowo krowy są psami XD
 	double money = 10000;   
 
 	cout << cows << endl; 
@@ -40,6 +40,7 @@ int main(int argc, char** argv)
 		money += cows.money(); //zwraca przychody minus koszty utrzymania
 		cout << cows << endl; 
 		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  
+		cows[0]->protect(5);
 	}
 	cows.sell_all();
 	cout << cows << endl << endl;
