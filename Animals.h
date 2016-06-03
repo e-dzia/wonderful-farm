@@ -45,7 +45,7 @@ class Animal{
 
 class Dog: public Animal{
 	private:
-		int _attacks_protected; //zerowana z poczatkiem kazdego roku
+		int _attacks_protected; //zerowana z poczatkiem kazdego roku?
 	public:
 		Dog(int i = 0, int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10, double buy = 800, double sell = 500, double cost = 400, double prodp = 0);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
 
