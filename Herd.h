@@ -11,8 +11,7 @@ class Herd{
 		vector <Animal *> _vecAnimals; //wektor z jednym (!) typem zwierzat
 	public:
 		Herd(); //konstruktor domyslny - tylko zajmuje miejsce na wektor i tyle
-		Herd(Animal * tab[], int n); //konstruktor kopiuje wszystkie elementy z wektora z maina i usuwa tamte
-		//inne konstruktory tez mozna zrobic, jak beda potrzebne ofc
+		Herd(Animal * tab[], int n); //konstruktor 
 		
 		int size(int years = -1) const;//liczba osobnikow (w zadanym wieku)
 		int males(int years = -1) const;//liczba samic/samcow (w zadanym wieku)

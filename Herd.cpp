@@ -145,10 +145,14 @@ void Herd::procreation(){
 	if (min == 0) return;
 	Animal * tab[min];
 	for (int i = 0; i < min; i++){
-		if (_vecAnimals.back()->type() == dog)
+		if (_vecAnimals.back()->type() == dog){
 			Animal * pAnimal = new Dog(i);
-		else Animal * pAnimal = new Animal(_vecAnimals.back()->type(), i);
-		tab[i] = pAnimal;
+			tab[i] = pAnimal;
+		}
+		else {
+			Animal * pAnimal = new Animal(_vecAnimals.back()->type(), i);
+			tab[i] = pAnimal;
+		}
 	}
 	add(tab,min);
 }

@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	for (int i = 0; i < rozmiar; i++){ 
 		Animal * pAnimal = new Animal(cow,i);
 		tab[i] = pAnimal; 
-	} 
+	}
 	Herd cows (tab,rozmiar);
 	Herd rabbits;
 	Herd sheeps; //liczba mnoga od sheep to ... sheep, ale inaczej nie zadziała, przepraszam XD
