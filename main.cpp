@@ -26,7 +26,9 @@ int main(int argc, char** argv)
 		Animal * pAnimal = new Dog(i);
 		tab[i] = pAnimal; 
 	} 
-	Herd dogs(tab, rozmiar);
+	Herd dogs;
+	dogs.add(tab, rozmiar);
+	dogs.add(tab[0]);
 	rozmiar = 5;
 	for (int i = 0; i < rozmiar; i++){ 
 		Animal * pAnimal = new Animal(cow,i);
@@ -42,6 +44,7 @@ int main(int argc, char** argv)
 	double money = 10000;   
 
 	cout << cows << endl; 
+	cout << dogs << endl;
 	money += cows.money(); 
 	cout << "Pieniazki gospodarstwa: " << money << endl << endl;   
 	for (int i = 0; i < 15; i++){ 
@@ -52,6 +55,7 @@ int main(int argc, char** argv)
 		//money += cows.sell(); //sprzedaje jedna losowa krowe
 		money += cows.money(); //zwraca przychody minus koszty utrzymania
 		cout << cows << endl; 
+		cout << dogs << endl;
 		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  
 	}
 	cows.sell_all();

@@ -85,7 +85,7 @@ void Herd::attack(int n){
 }
 
 void Herd::add(Animal * new_one){
-	if (_vecAnimals.back()->type()==new_one->type())
+	if (_vecAnimals.size() == 0 || _vecAnimals.back()->type() == new_one->type())
 		_vecAnimals.push_back(new_one);
 	else cout << "Zle zwierzeta dodajesz do siebie, ziomek!\n";
 }
