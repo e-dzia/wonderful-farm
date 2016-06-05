@@ -110,7 +110,7 @@ double Herd::money(){
 		double sum = assets()*(_vecAnimals.back()->prod_price()) - (_vecAnimals.back()->costs())*size();
 		return sum;
 	}
-	return 0;
+	else return -(_vecAnimals.back()->costs()*size());
 }
 
 double Herd::sell(int n){

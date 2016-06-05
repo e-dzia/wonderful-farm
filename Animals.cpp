@@ -10,6 +10,14 @@ double Animal::_buy_horse = 7000;
 double Animal::_buy_rabbit = 30;
 double Animal::_buy_dog = 800;
 
+double Animal::costs_chicken = 50;
+double Animal::costs_cow = 500;
+double Animal::costs_pig = 300;
+double Animal::costs_sheep = 300;
+double Animal::costs_horse = 400;
+double Animal::costs_rabbit = 50;
+double Animal::costs_dog = 400;
+
 Animal::Animal(animals type, int i){
 	_type = type;
 	srand(time(NULL)+i);
@@ -21,7 +29,7 @@ Animal::Animal(animals type, int i){
 			_dying = 14;
 			_sell_price = 3; 
 			_buy_price = _buy_chicken;
-			_costs = 50; 
+			_costs = costs_chicken; 
 			_prod_price = 0.5;
 			if (_sex == 1) setProductiveness(100,300,i); //jajka
 			else setProductiveness(0,0,i);
@@ -31,7 +39,7 @@ Animal::Animal(animals type, int i){
 			_dying = 15;
 			_buy_price = _buy_cow;
 			_sell_price = 3000; 
-			_costs = 500; 
+			_costs = costs_cow; 
 			_prod_price = 1.5;
 			if (_sex == 1) setProductiveness(5000,10000,i); //mleko
 			else setProductiveness(0,0,i);
@@ -39,7 +47,7 @@ Animal::Animal(animals type, int i){
 		case pig: 
 			_procreate = 2;
 			_dying = 20;
-			_costs = 300; 
+			_costs = costs_pig; 
 			_buy_price = _buy_pig;
 			_prod_price = 5.2;
 			setProductiveness(40,300,i); //kg mięsa
@@ -50,7 +58,7 @@ Animal::Animal(animals type, int i){
 			_dying = 12;
 			_buy_price = _buy_sheep;
 			_sell_price = 150; 
-			_costs = 300; 
+			_costs = costs_sheep; 
 			_prod_price = 2;
 			setProductiveness(100,500,i); //wełna
 			break;
@@ -59,7 +67,7 @@ Animal::Animal(animals type, int i){
 			_dying = 30;
 			_sell_price = 5000; 
 			_buy_price = _buy_horse;
-			_costs = 400; 
+			_costs = costs_horse; 
 			_prod_price = 0;
 			setProductiveness(0,0);
 			break;
@@ -68,7 +76,7 @@ Animal::Animal(animals type, int i){
 			_dying = 8;
 			_buy_price = _buy_rabbit;
 			_sell_price = 20; 
-			_costs = 50; 
+			_costs = costs_rabbit; 
 			_prod_price = 0;
 			setProductiveness(0,0);
 			break;
@@ -77,7 +85,7 @@ Animal::Animal(animals type, int i){
 			_dying = 15;
 			_sell_price = 500; 
 			_buy_price = _buy_dog;
-			_costs = 400; 
+			_costs = costs_dog; 
 			_prod_price = 0;
 			setProductiveness(2,10);
 			break;
