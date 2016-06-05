@@ -22,6 +22,7 @@ Herd::Herd(){
 }
 
 int Herd::size(int years) const {
+	if (_vecAnimals.size()==0) return 0;
 	if (years == -1) return _vecAnimals.size();
 	else{
 		int n = 0;
@@ -34,6 +35,7 @@ int Herd::size(int years) const {
 
 int Herd::males(int years) const{
 	int n = 0;
+	if (_vecAnimals.size()==0) return 0;
 	if (years == -1) {
 		for (int i = 0; i < _vecAnimals.size(); i++){
 			if (_vecAnimals[i]->sex()==0) n++;
@@ -49,6 +51,7 @@ int Herd::males(int years) const{
 
 int Herd::females(int years) const{
 	int n = 0;
+	if (_vecAnimals.size()==0) return 0;
 	if (years == -1) {
 		for (int i = 0; i < _vecAnimals.size(); i++){
 			if ( _vecAnimals[i]->sex()==1) n++;
@@ -97,6 +100,7 @@ void Herd::add(Animal * new_ones[], int n){
 }
 
 int Herd::assets(){
+	if (size()==0) return 0;
 	int sum = 0;
 	for (int i = 0; i < _vecAnimals.size(); i++){
 		sum += _vecAnimals[i]->productiveness();
@@ -105,7 +109,7 @@ int Herd::assets(){
 }
 
 double Herd::money(){
-	if (_vecAnimals.size()==0) return 0;
+	if (size()==0) return 0;
 	if (_vecAnimals.back()->type()!=pig){
 		double sum = assets()*(_vecAnimals.back()->prod_price()) - (_vecAnimals.back()->costs())*size();
 		return sum;
@@ -128,7 +132,7 @@ double Herd::sell(int n){
 }
 
 double Herd::sell_all(){
-	if (_vecAnimals.size()==0) return 0;
+	if (size()==0) return 0;
 	double sum = 0;
 	for (int i = 0; i < _vecAnimals.size(); i++){
 		sum += _vecAnimals[i]->sell();
