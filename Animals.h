@@ -26,10 +26,7 @@ class Animal{
 		Animal(int proc, int die, int prod_x, int prod_y, double buy, double sell, double cost, double prodp, int i = 0); //konstruktor dla psa
 		
 		static double _buy_chicken, _buy_cow, _buy_pig, _buy_sheep, _buy_horse, _buy_rabbit, _buy_dog; //ceny kupna
-<<<<<<< HEAD
-=======
 		static double costs_chicken, costs_cow, costs_pig, costs_sheep, costs_horse, costs_rabbit, costs_dog; //ceny utrzymania
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 
 		//gettery:
 		int age() {return _age;};
