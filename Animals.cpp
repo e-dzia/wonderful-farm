@@ -25,6 +25,8 @@ Animal::Animal(animals type, int i){
 	_sex = (rand()%2+i%2)%2;
 	switch(type){
 	case chicken: 
+			if ((rand()+i)%3 == 0) _sex = 0;
+			else _sex = 1;
 			_procreate = 10;
 			_dying = 14;
 			_sell_price = 3; 
@@ -35,6 +37,8 @@ Animal::Animal(animals type, int i){
 			else setProductiveness(0,0,i);
 			break;
 		case cow: 
+			if ((rand()+i)%3 == 0) _sex = 0;
+			else _sex = 1;
 			_procreate = 1;
 			_dying = 15;
 			_buy_price = _buy_cow;
