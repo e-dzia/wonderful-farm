@@ -9,8 +9,6 @@ double Animal::_buy_sheep = 200;
 double Animal::_buy_horse = 7000;
 double Animal::_buy_rabbit = 30;
 double Animal::_buy_dog = 800;
-<<<<<<< HEAD
-=======
 
 double Animal::costs_chicken = 50;
 double Animal::costs_cow = 500;
@@ -19,7 +17,6 @@ double Animal::costs_sheep = 300;
 double Animal::costs_horse = 400;
 double Animal::costs_rabbit = 50;
 double Animal::costs_dog = 400;
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 
 Animal::Animal(animals type, int i){
 	_type = type;
@@ -34,11 +31,7 @@ Animal::Animal(animals type, int i){
 			_dying = 14;
 			_sell_price = 3; 
 			_buy_price = _buy_chicken;
-<<<<<<< HEAD
-			_costs = 50; 
-=======
 			_costs = costs_chicken; 
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 			_prod_price = 0.5;
 			if (_sex == 1) setProductiveness(100,300,i); //jajka
 			else setProductiveness(0,0,i);
@@ -58,11 +51,7 @@ Animal::Animal(animals type, int i){
 		case pig: 
 			_procreate = 2;
 			_dying = 20;
-<<<<<<< HEAD
-			_costs = 300; 
-=======
 			_costs = costs_pig; 
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 			_buy_price = _buy_pig;
 			_prod_price = 5.2;
 			setProductiveness(40,300,i); //kg mięsa
@@ -82,11 +71,7 @@ Animal::Animal(animals type, int i){
 			_dying = 30;
 			_sell_price = 5000; 
 			_buy_price = _buy_horse;
-<<<<<<< HEAD
-			_costs = 400; 
-=======
 			_costs = costs_horse; 
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 			_prod_price = 0;
 			setProductiveness(0,0);
 			break;
@@ -104,11 +89,7 @@ Animal::Animal(animals type, int i){
 			_dying = 15;
 			_sell_price = 500; 
 			_buy_price = _buy_dog;
-<<<<<<< HEAD
-			_costs = 400; 
-=======
 			_costs = costs_dog; 
->>>>>>> de94147d3a56e980a480062e841771ea900fb110
 			_prod_price = 0;
 			setProductiveness(2,10);
 			break;
