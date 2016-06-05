@@ -62,7 +62,7 @@ int main(int argc, char** argv){
 
 	else
 		bankruptcy(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
-	
+
 	return 0;
 	
 }
@@ -71,7 +71,7 @@ int isCorrect(int range){
 
 	int number;
 
-	while(number > range || number <= 0){
+	while(number > range || number < 0){
 
 		cin >> number;
 
@@ -184,7 +184,13 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 		cout << "[7] Świnie" << endl;
 
+		cout << "[0] Zrezygnuj" << endl;
+
+
 		number = isCorrect(7);
+
+		if (number==0)
+			break;
 
 		switch(number){
 
@@ -197,6 +203,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile psów chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_dog) << endl;
 
 			quantity=isCorrect(1000);
+
+			if (quantity==0)
+				break;
 
 			if(quantity*Animal::_buy_dog<=money){
 
@@ -245,6 +254,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(1000);
 
+			if (quantity==0)
+				break;
+
 			if(quantity*Animal::_buy_cow<=money){
 
 				if (quantity==1){
@@ -291,6 +303,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile królików chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_rabbit) << endl;
 
 			quantity=isCorrect(1000);
+
+			if (quantity==0)
+				break;
 
 			if(quantity*Animal::_buy_rabbit<=money){
 
@@ -339,6 +354,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(1000);
 
+			if (quantity==0)
+				break;
+
 			if(quantity*Animal::_buy_sheep<=money){
 
 				if (quantity==1){
@@ -385,6 +403,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile kurczaków chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_chicken) << endl;
 
 			quantity=isCorrect(1000);
+
+			if (quantity==0)
+				break;
 
 			if(quantity*Animal::_buy_chicken<=money){
 
@@ -434,6 +455,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(1000);
 
+			if (quantity==0)
+				break;
+
 			if(quantity*Animal::_buy_horse<=money){
 
 				if (quantity==1){
@@ -481,6 +505,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile świń chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_pig) << endl;
 
 			quantity=isCorrect(1000);
+
+			if (quantity==0)
+				break;
 
 			if(quantity*Animal::_buy_pig<=money){
 
@@ -542,7 +569,12 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 		cout << "[7] Świnie" << endl;
 
+		cout << "[0] Zrezygnuj" << endl;
+
 		number=isCorrect(7);
+
+		if (number==0)
+				break;
 
 		switch(number){
 
@@ -554,6 +586,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile psów chcesz sprzedać?" << endl;
 
 			quantity=isCorrect(dogs.size());
+
+			if (quantity==0)
+				break;
 
 			money+=dogs.sell(quantity);
 
@@ -568,6 +603,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(cows.size());
 
+			if (quantity==0)
+				break;
+
 			money+=cows.sell(quantity);
 
 			break;
@@ -580,6 +618,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile królików chcesz sprzedać?" << endl;
 
 			quantity=isCorrect(rabbits.size());
+
+			if (quantity==0)
+				break;
 
 			money+=rabbits.sell(quantity);
 
@@ -594,6 +635,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(sheeps.size());
 
+			if (quantity==0)
+				break;
+
 			money+=sheeps.sell(quantity);
 
 			break;
@@ -607,6 +651,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(chickens.size());
 
+			if (quantity==0)
+				break;
+
 			money+=chickens.sell(quantity);
 
 			break;
@@ -619,6 +666,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			quantity=isCorrect(horses.size());
 
+			if (quantity==0)
+				break;
+
 			money+=horses.sell(quantity);
 
 			break;
@@ -630,6 +680,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			cout << "Ile świń chcesz sprzedać?" << endl;
 
 			quantity=isCorrect(pigs.size());
+
+			if (quantity==0)
+				break;
 
 			money+=pigs.sell(quantity);
 
@@ -652,6 +705,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 	cout << "[2] Nie" << endl << endl;
 
 	quit=isCorrect(2);
+
+	if (quantity==0)
+		break;
 
 	pause();
 
