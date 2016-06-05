@@ -21,7 +21,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		rabbits.attack(kills);
 
-		cout << "Atak kuny! Z Twojego stadka pozostało " << kills << " królików." << endl ;
+		cout << "Atak kuny! Zabiła " << kills << " królików." << endl ;
 		
 		if(dogs.size()>0 && !dogs[0]->protect())
 		{
