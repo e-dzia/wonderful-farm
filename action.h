@@ -2,6 +2,7 @@
 
 void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs)
 {
+	cout << "RANDOM INCIDENTS RUNNING ############" << endl;
 	int marten, bat, wolf, fox, pilferer;
 	int kills;
 
@@ -21,7 +22,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		rabbits.attack(kills);
 
-		cout << "Atak kuny! Zabiła " << kills << " królików." << endl ;
+		cout << "Atak kuny! Z Twojego stadka pozostało " << kills << " królików." << endl ;
 		
 		if(dogs.size()>0 && !dogs[0]->protect())
 		{
@@ -142,7 +143,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			kills = (rand()%7)+1;
 			chickens.attack(kills);
 
-			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " owiec." << endl ;
+			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " kur." << endl ;
 		}
 
 		if(n==6 && horses.size()>0)
@@ -152,5 +153,6 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy przybył przebiegły złodziejaszek i odjechał na Twoim koniu." << endl ;
 		}
 	}
+	cout << "RANDOM INCIDENTS EXIT ############" << endl;
 
 }
