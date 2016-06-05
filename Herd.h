@@ -27,7 +27,6 @@ class Herd{
 
 		double sell(int n=1); //sprzedaje n zwierzat (najstarszych)
 		double sell_all(); // sprzedaje wszystko
-		//double buy(animals t);
 		
 		void procreation();//rozmnazanie - dodaje nowe obiekty do wektora
 		

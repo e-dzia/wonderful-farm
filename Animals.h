@@ -10,7 +10,7 @@ class Animal{
 		animals _type; //typ zwierzaka: kura, krowa, itd.
 		int _procreate; //współczynnik rozmnazania: nowych osobnikow z jednej matki/rok lub sezon
 		int _dying; //wiek umierania w latach
-		int _productiveness; //produktywnosc konkretnego osobnika (moze byc zmienna z wiekiem lub stała), np. liczba jajek na sezon dla kur
+		int _productiveness; //produktywnosc konkretnego osobnika
 		int _age; //wiek konkretnego zwierzecia
 		bool _sex; //plec konkretnego zwierzecia 0 - male, 1 - female
 		void setProductiveness(int x, int y, int i = 0); //ustawia produktywnosc na losowa wartosc z zadanego przedzialu (x,y)
@@ -37,7 +37,6 @@ class Animal{
 		int dying(){return _dying;};
 		double prod_price(){return _prod_price;};
 		double costs(){return _costs;};
-		//double buy_price(animals t = chicken);
 		double sell(){return _sell_price;};  
 		
 		virtual bool ageing(); //starzenie zwierzaka, zwieksza wiek zwierzaka o 1, zwraca true jesli jest ok i false jesli ma umrzec
@@ -49,7 +48,7 @@ class Animal{
 
 class Dog: public Animal{
 	private:
-		int _attacks_protected; //zerowana z poczatkiem kazdego roku?
+		int _attacks_protected; //zerowana z poczatkiem kazdego roku
 	public:
 		Dog(int i = 0, int proc = 1, int die = 15, int prod_x = 2, int prod_y = 10, double buy = 800, double sell = 500, double cost = 400, double prodp = 0);// konstruktor domyslny - losuje plec i produktywnosc, ustawia wiek na zero
 
