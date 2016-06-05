@@ -2,6 +2,13 @@
 #include <time.h>
 #include "Animals.h"
 
+double Animal::_buy_chicken = 3.6;
+double Animal::_buy_cow = 4000;
+double Animal::_buy_pig = 200;
+double Animal::_buy_sheep = 200;
+double Animal::_buy_horse = 7000;
+double Animal::_buy_rabbit = 30;
+double Animal::_buy_dog = 800;
 
 Animal::Animal(animals type, int i){
 	_type = type;
@@ -12,8 +19,8 @@ Animal::Animal(animals type, int i){
 	case chicken: 
 			_procreate = 10;
 			_dying = 14;
-			_buy_price = 3.6; 
 			_sell_price = 3; 
+			_buy_price = _buy_chicken;
 			_costs = 50; 
 			_prod_price = 0.5;
 			if (_sex == 1) setProductiveness(100,300,i); //jajka
@@ -22,7 +29,7 @@ Animal::Animal(animals type, int i){
 		case cow: 
 			_procreate = 1;
 			_dying = 15;
-			_buy_price = 4000; 
+			_buy_price = _buy_cow;
 			_sell_price = 3000; 
 			_costs = 500; 
 			_prod_price = 1.5;
@@ -32,8 +39,8 @@ Animal::Animal(animals type, int i){
 		case pig: 
 			_procreate = 2;
 			_dying = 20;
-			_buy_price = 200; 
 			_costs = 300; 
+			_buy_price = _buy_pig;
 			_prod_price = 5.2;
 			setProductiveness(40,300,i); //kg mięsa
 			_sell_price = _productiveness * _prod_price;
@@ -41,7 +48,7 @@ Animal::Animal(animals type, int i){
 		case sheep: 
 			_procreate = 7;
 			_dying = 12;
-			_buy_price = 200; 
+			_buy_price = _buy_sheep;
 			_sell_price = 150; 
 			_costs = 300; 
 			_prod_price = 2;
@@ -50,8 +57,8 @@ Animal::Animal(animals type, int i){
 		case horse: 
 			_procreate = 1;
 			_dying = 30;
-			_buy_price = 7000; 
 			_sell_price = 5000; 
+			_buy_price = _buy_horse;
 			_costs = 400; 
 			_prod_price = 0;
 			setProductiveness(0,0);
@@ -59,7 +66,7 @@ Animal::Animal(animals type, int i){
 		case rabbit:
 			_procreate = 100;
 			_dying = 8;
-			_buy_price = 30; 
+			_buy_price = _buy_rabbit;
 			_sell_price = 20; 
 			_costs = 50; 
 			_prod_price = 0;
@@ -68,8 +75,8 @@ Animal::Animal(animals type, int i){
 		case dog:
 			_procreate = 1;
 			_dying = 15;
-			_buy_price = 800; 
 			_sell_price = 500; 
+			_buy_price = _buy_dog;
 			_costs = 400; 
 			_prod_price = 0;
 			setProductiveness(2,10);

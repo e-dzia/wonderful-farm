@@ -25,8 +25,9 @@ class Herd{
 		int assets(); //zwraca laczna liczbe produkowanych rzeczy przez stado
 		double money(); //zwraca liczbe pieniedzy, którą się zaorbiło na całym stadzie przez rok minus koszt utrzymania
 
-		double sell(int n=1); //sprzedaje n zwierzat (losowych)
+		double sell(int n=1); //sprzedaje n zwierzat (najstarszych)
 		double sell_all(); // sprzedaje wszystko
+		//double buy(animals t);
 		
 		void procreation();//rozmnazanie - dodaje nowe obiekty do wektora
 		

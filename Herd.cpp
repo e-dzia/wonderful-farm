@@ -115,16 +115,16 @@ double Herd::money(){
 
 double Herd::sell(int n){
 	if (size()==0) return 0;
+	double sum = 0;
 	if (n >= _vecAnimals.size())
-		sell_all();
+		sum = sell_all();
 	else {
-		double sum = 0;
 		for (int i = 0; i < n; i++){
-			int random = rand()%(_vecAnimals.size());
-			sum += _vecAnimals[i]->sell();
-			_vecAnimals.erase(_vecAnimals.begin()+random);
+			sum += _vecAnimals[0]->sell();
+			_vecAnimals.erase(_vecAnimals.begin());
 		}
 	}
+	return sum;
 }
 
 double Herd::sell_all(){

@@ -14,16 +14,19 @@ class Animal{
 		int _age; //wiek konkretnego zwierzecia
 		bool _sex; //plec konkretnego zwierzecia 0 - male, 1 - female
 		void setProductiveness(int x, int y, int i = 0); //ustawia produktywnosc na losowa wartosc z zadanego przedzialu (x,y)
-		double _buy_price; //cena kupna
+		double _buy_price;
 		double _sell_price; //cena sprzedazy
 		double _costs; //koszt utrzymania roczny
 		double _prod_price; //cena za jedną produktywność (np. jedno jajko)
+		
 
 		
 	public:
 		Animal(animals type, int i=0); // konstruktor - losuje plec, ustawia wiek na zero
 		Animal(int proc, int die, int prod_x, int prod_y, double buy, double sell, double cost, double prodp, int i = 0); //konstruktor dla psa
 		
+		static double _buy_chicken, _buy_cow, _buy_pig, _buy_sheep, _buy_horse, _buy_rabbit, _buy_dog; //ceny kupna
+
 		//gettery:
 		int age() {return _age;};
 		bool sex() {return _sex;};
@@ -33,7 +36,7 @@ class Animal{
 		int dying(){return _dying;};
 		double prod_price(){return _prod_price;};
 		double costs(){return _costs;};
-		double buy(){return _buy_price;};
+		//double buy_price(animals t = chicken);
 		double sell(){return _sell_price;};  
 		
 		virtual bool ageing(); //starzenie zwierzaka, zwieksza wiek zwierzaka o 1, zwraca true jesli jest ok i false jesli ma umrzec
