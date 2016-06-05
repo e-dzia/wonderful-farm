@@ -8,11 +8,12 @@
 
 using namespace std; 
 
+int isCorrect(int range);
+
 int main(int argc, char** argv){
 
 	int semestr=start();
 
-	int rozmiar = 0;
 
 	srand(time(NULL));
 
@@ -49,3 +50,4 @@ int main(int argc, char** argv){
 	return 0;
 	
 }
+

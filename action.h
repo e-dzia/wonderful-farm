@@ -157,7 +157,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 int isCorrect(int range){
 
-	int number;
+	int number = -1;
 
 	while(number > range || number < 0){
 
@@ -186,7 +186,7 @@ void clear() {
 void pause(){
 
 	cout << "Wciśnij enter żeby kontynuować ..." << endl;
-    cin.get(); 
+   	cin.get(); 
 
 }
 
@@ -320,7 +320,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -370,7 +370,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -420,7 +420,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -470,7 +470,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -520,7 +520,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -571,7 +571,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -622,7 +622,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			}
 
 			else{
-
+				cin.get();
 				cout << "Nie masz wystarczająco pieniędzy." << endl;
 				pause();
 
@@ -665,10 +665,11 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			case 1:
 
 			clear();
+			cin.clear();
 			cout << "Liczba Twoich psów: " << dogs.size() << endl;
 			if (dogs.size()>0) cout << "Cena sprzedaży najstarszego z Twoich psów (młodsze są tańsze): " << dogs[0]->sell() << endl;
 			cout << "Ile psów chcesz sprzedać?" << endl;
-
+			
 			quantity=isCorrect(dogs.size());
 
 			if (quantity==0)
@@ -691,6 +692,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				break;
 
 			money+=cows.sell(quantity);
+			pause();
 
 			break;
 
@@ -707,6 +709,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				break;
 
 			money+=rabbits.sell(quantity);
+			pause();
 
 			break;
 
@@ -723,6 +726,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				break;
 
 			money+=sheeps.sell(quantity);
+			pause();
 
 			break;
 			
@@ -739,6 +743,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				break;
 
 			money+=chickens.sell(quantity);
+			pause();
 
 			break;
 		
@@ -755,6 +760,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				break;
 
 			money+=horses.sell(quantity);
+			pause();
 
 			break;
 			
@@ -772,6 +778,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 			money+=pigs.sell(quantity);
 
+			pause();
+
 			break;
 			
 		}
@@ -782,7 +790,6 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 		break;
 
 	}
-
 	clear();
 
 	cout << "Czy chcesz coś jeszcze dzisiaj zrobić?" << endl << endl;
