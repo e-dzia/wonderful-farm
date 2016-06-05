@@ -2,6 +2,7 @@
 
 void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs)
 {
+	cout << "RANDOM INCIDENTS RUNNING ############" << endl;
 	int marten, bat, wolf, fox, pilferer;
 	int kills;
 
@@ -152,5 +153,6 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 			cout << "Pod osłoną nocy przybył przebiegły złodziejaszek i odjechał na Twoim koniu." << endl ;
 		}
 	}
+	cout << "RANDOM INCIDENTS EXIT ############" << endl;
 
 }

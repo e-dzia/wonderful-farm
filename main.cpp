@@ -10,8 +10,10 @@ void randomIncidents(Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
 void clear();
 void pause();
 int start();
-void menu(double&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
-void period(double&, int, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
+void menu(double&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, int&, int&, int&, int&, int&, int&, int&);
+void period(double&, int, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, int&, int&, int&, int&, int&, int&, int&);
+void summary(double&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
+void bankruptcy(double&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
 int isCorrect(int);
 
 /*
@@ -31,7 +33,9 @@ int main(int argc, char** argv){
 
 	int rozmiar = 0;
 
-	double money=100000;
+	double money=1000;
+
+	int newCows, newChickens, newDogs, newSheeps, newHorses, newPigs, newRabbits;			
 
 	Herd cows;
 	Herd rabbits;
@@ -41,13 +45,24 @@ int main(int argc, char** argv){
 	Herd pigs;
 	Herd dogs;
 
-	for(int i=1; i<=semestr; i++){
+	int i=1;
 
-		period(money, i, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
-		menu(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
+	while(money>=0 && i<=semestr){
+
+		period(money, i, dogs, cows, rabbits, sheeps, chickens, horses, pigs, newCows, newRabbits, newPigs, newHorses, newSheeps, newDogs, newChickens);
+
+		menu(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs, newCows, newRabbits, newPigs, newHorses, newSheeps, newDogs, newChickens);
+
+		i++;
 
 	}
 
+	if(money>=0)
+		summary(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
+
+	else
+		bankruptcy(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
+	
 	return 0;
 	
 }
@@ -73,8 +88,6 @@ int isCorrect(int range){
 	return number;
 
 }
-
-
 
 void clear() {
  
@@ -118,7 +131,7 @@ int start(){
 
 }
 
-void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs, int& newCows, int& newRabbits, int& newPigs, int& newHorses, int& newSheeps, int& newDogs, int& newChickens){
 
 	int quit=1;
 
@@ -135,7 +148,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 	/*while(quit==1){
 
 */
-	do{
+	while(quit==1 && money>=0){
 
 	clear();
 
@@ -145,7 +158,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 	cout << "[2] Sprzedać zwierzynę." << endl << endl;
 
-	option=isCorrect(2);
+	cout << "[3] Odpoczywać na drewnianej werandzie." << endl << endl;
+
+	option=isCorrect(3);
 
 	clear();
 
@@ -207,6 +222,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 				money-=quantity*Animal::_buy_dog;
 
+				newDogs=quantity;
+
 			}
 
 			else{
@@ -251,6 +268,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				}
 
 				money-=quantity*Animal::_buy_cow;
+
+				newCows=quantity;
 
 			}
 
@@ -297,6 +316,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 				money-=quantity*Animal::_buy_rabbit;
 
+				newRabbits=quantity;
+
 			}
 
 			else{
@@ -342,6 +363,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 				money-=quantity*Animal::_buy_sheep;
 
+				newSheeps=quantity;
+
 			}
 
 			else{
@@ -386,6 +409,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				}
 
 				money-=quantity*Animal::_buy_chicken;
+
+				newChickens=quantity;
 
 			}
 
@@ -433,6 +458,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 				money-=quantity*Animal::_buy_horse;
 
+				newHorses=quantity;
+
 			}
 
 			else{
@@ -478,6 +505,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				}
 
 				money-=quantity*Animal::_buy_pig;
+
+				newPigs=quantity;
 
 			}
 
@@ -608,25 +637,29 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			
 		}
 
+		case 3:
+
+
 		break;
 
 	}
+
 	clear();
 
 	cout << "Czy chcesz coś jeszcze dzisiaj zrobić?" << endl << endl;
 
 	cout << "[1] Tak" << endl;
-	cout << "[2] Nie" << endl;
+	cout << "[2] Nie" << endl << endl;
 
 	quit=isCorrect(2);
 
 	pause();
 
-	}while(quit==1);
+	}
 
 }	
 
-void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs, int& newCows, int& newRabbits, int& newPigs, int& newHorses, int& newSheeps, int& newDogs, int& newChickens){
 
 	clear();
 
@@ -639,7 +672,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		dogs.procreation();
 
 		if(dogs.size(0))
-			cout << "Urodziło się: " << dogs.size(0) << " psów" << endl;
+			cout << "Urodziło się: " << dogs.size(0)-newDogs << " psów" << endl;
 
 		dogs.obsolescence();
 
@@ -648,7 +681,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		cows.procreation();
 
 		if(cows.size(0))
-			cout << "Urodziło się: " << cows.size(0) << " krów" << endl;
+			cout << "Urodziło się: " << cows.size(0)-newCows << " krów" << endl;
 
 		cows.obsolescence();
 
@@ -657,7 +690,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		rabbits.procreation();
 
 		if(rabbits.size(0))
-			cout << "Urodziło się: " << rabbits.size(0) << " królików" << endl;
+			cout << "Urodziło się: " << rabbits.size(0)-newRabbits << " królików" << endl;
 
 		rabbits.obsolescence();
 
@@ -666,7 +699,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		sheeps.procreation();
 
 		if(sheeps.size(0))
-			cout << "Urodziło się: " << sheeps.size(0) << " owiec" << endl;
+			cout << "Urodziło się: " << sheeps.size(0)-newSheeps << " owiec" << endl;
 
 		sheeps.obsolescence();
 
@@ -675,7 +708,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		chickens.procreation();
 
 		if(chickens.size(0))
-			cout << "Urodziło się: " << chickens.size(0) << " kurczaków" << endl;
+			cout << "Urodziło się: " << chickens.size(0)-newChickens << " kurczaków" << endl;
 
 		chickens.obsolescence();
 
@@ -684,7 +717,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		horses.procreation();
 
 		if(horses.size(0))
-			cout << "Urodziło się: " << horses.size(0) << " koni" << endl;
+			cout << "Urodziło się: " << horses.size(0)-newHorses << " koni" << endl;
 
 		horses.obsolescence();
 
@@ -693,7 +726,7 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 		pigs.procreation();
 
 		if(pigs.size(0))
-			cout << "Urodziło się: " << pigs.size(0) << " świń" << endl;
+			cout << "Urodziło się: " << pigs.size(0)-newPigs << " świń" << endl;
 
 		pigs.obsolescence();
 
@@ -735,6 +768,57 @@ void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, H
 
 
 	pause();
+
+
+}
+
+void summary(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+
+	clear();
+
+	cout << "Gratulacje, udało Ci się ukończyć rozgrywkę! W nagrodę otrzymujesz tytuł Sołtysa!" << endl;
+
+	cout << "Po ostatnim połroczu Twoja farma wyglądała następująco:" << endl << endl;
+
+	cout << dogs << endl;
+
+	cout << cows << endl;
+
+	cout << rabbits << endl;
+
+	cout << sheeps << endl;
+
+	cout << chickens << endl;
+
+	cout << horses << endl;
+
+	cout << pigs << endl;
+
+}
+
+void bankruptcy(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+
+	clear();
+
+	cout << "Co się martwisz, co się smucisz, ze wsi jesteś, na wieś wrócisz." << endl << endl;
+
+	cout << "Niestety zadanie okazało się dla Ciebie zbyt trudne, spróbuj jeszcze raz." << endl << endl;
+
+	cout << "Pod koniec rozgrywki na Twojej farmie głodowały:" << endl << endl;
+
+	cout << dogs << endl;
+
+	cout << cows << endl;
+
+	cout << rabbits << endl;
+
+	cout << sheeps << endl;
+
+	cout << chickens << endl;
+
+	cout << horses << endl;
+
+	cout << pigs << endl;
 
 
 }
