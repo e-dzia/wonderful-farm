@@ -112,11 +112,12 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	wolf = rand()%6;
 	fox = rand()%4;
 	pilferer = rand()%4;
-	int random = 1;
+	int random = 1, a;
 
 	if(random == marten && rabbits.size()>0)
 	{
-		kills = ((rand()%10)+3) - dogs[0]->productiveness();
+		a = (rand()%10)+3 ;
+		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		rabbits.attack(kills);
 
 		cout << "Atak kuny! Z Twojego stadka pozostało " << kills << " królików." ;
@@ -130,7 +131,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 	if(random == bat && cows.size()>0)
 	{
-		kills = (rand()%5)+1;
+		a = (rand()%5)+1;
+		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		cows.attack(kills);
 
 		cout << "Przyleciały krwiożercze nietoperze. Wyssały krew z " << kills << " Twoich krów." << endl ;
@@ -138,7 +140,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 	if(random == wolf && pigs.size()>0)
 	{
-		kills = ((rand()%5)+1) - dogs[0]->productiveness();
+		a = (rand()%5)+1;
+		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		pigs.attack(kills);
 
 		cout << "W nocy przybiegły wilki, pożerając " << kills << " Twoich świń." ;
@@ -157,7 +160,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n == 0 && sheeps.size()>0) //Lis je owce
 		{
-			kills = ((rand()%7)+1) - dogs[0]->productiveness();
+			a = (rand()%7)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			sheeps.attack(kills); // przepraszam jeszcze raz xD
 
 			cout << "W nocy przybiegł lis chytrusek i zagryzł " << kills << " Twoich owiec." ;
@@ -171,7 +175,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n == 1 && chickens.size()>0) // Lis je kury
 		{
-			kills = ((rand()%7)+1) - dogs[0]->productiveness();
+			a = rand()%7)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			chickens.attack(kills);
 
 			cout << "W nocy przybiegł lis chytrusek i zjadł " << kills << " Twoich kur." ;
@@ -190,7 +195,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	
 		if(n==1 && rabbits.size()>0)
 		{
-			kills = ((rand()%10)+3);
+			a = (rand()%10)+3;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			rabbits.attack(kills);
 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " królików." ;
@@ -198,7 +204,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n==2 && cows.size()>0)
 		{
-			kills = (rand()%5)+1;
+			a = (rand()%5)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			cows.attack(kills);
 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " krów." ;
@@ -206,7 +213,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n==3 && pigs.size()>0)
 		{	
-			kills = (rand()%5)+1;
+			a = (rand()%5)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			pigs.attack(kills);
 		
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " świń." ;
@@ -214,7 +222,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n==4 && sheeps.size()>0)
 		{
-			kills = (rand()%7)+1;
+			a = (rand()%7)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			sheeps.attack(kills);
 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " owiec." ;
@@ -222,7 +231,8 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 
 		if(n==5 && chickens.size()>0)
 		{
-			kills = (rand()%7)+1;
+			a = (rand()%7)+1;
+			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			chickens.attack(kills);
 
 			cout << "Pod osłoną nocy gospodarstwo okradł wioskowy złodziejaszek, zabierając " << kills << " owiec." ;
