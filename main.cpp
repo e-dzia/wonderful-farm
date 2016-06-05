@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 #include "Animals.h"
 #include "Herd.h"
@@ -8,8 +9,9 @@ void randomIncidents(Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
 void clear();
 void pause();
 int start();
-void menu(Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
-void period(int, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
+void menu(double&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
+void period(double&, int, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&, Herd&);
+int isCorrect(int);
 
 /*
 - uzytkownik wybiera liczbe lat symulacji
@@ -24,29 +26,15 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-	//start();
-	//int semestr=4;
 	int semestr=start();
 
 	int rozmiar = 0;
 
-	//Animal * tab[rozmiar]; //tablica wskaźników 
-	
-	/*
-	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Dog(i);
-		tab[i] = pAnimal; 
-	} 
-	Herd dogs(tab, rozmiar);
-	rozmiar = 5;
-	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Animal(cow,i);
-		tab[i] = pAnimal; 
-	}
-	*/
+	double money=1000;
+
 	Herd cows;
 	Herd rabbits;
-	Herd sheeps; //liczba mnoga od sheep to ... sheep, ale inaczej nie zadziała, przepraszam XD
+	Herd sheeps;
 	Herd chickens;
 	Herd horses;
 	Herd pigs;
@@ -54,52 +42,35 @@ int main(int argc, char** argv){
 
 	for(int i=1; i<=semestr; i++){
 
-		period(i, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
-		menu(dogs, cows, rabbits, sheeps, chickens, horses, pigs);
+		period(money, i, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
+		menu(money, dogs, cows, rabbits, sheeps, chickens, horses, pigs);
 
-	/*int rozmiar = 0;
-	Animal * tab[rozmiar]; //tablica wskaźników 
-	
-	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Dog(i);
-		tab[i] = pAnimal; 
-	} 
-	Herd dogs(tab, rozmiar);
-	rozmiar = 5;
-	for (int i = 0; i < rozmiar; i++){ 
-		Animal * pAnimal = new Animal(cow,i);
-		tab[i] = pAnimal; 
-	}
-	Herd cows (tab,rozmiar);
-	Herd rabbits;
-	Herd sheeps; //liczba mnoga od sheep to ... sheep, ale inaczej nie zadziała, przepraszam XD
-	
-	Herd horses;
-	Herd pigs;
-
-	double money = 10000;   
-
-	cout << cows << endl; 
-	money += cows.money(); 
-	cout << "Pieniazki gospodarstwa: " << money << endl << endl;   
-	for (int i = 0; i < 15; i++){ 
-		cout << "Rok: " << i+1 << endl;
-		cows.obsolescence(); //usun stare
-		cows.procreation(); //rozmnoz mlode
-		randomIncidents(dogs, cows, rabbits, sheeps, chickens, horses, pigs);
-		//money += cows.sell(); //sprzedaje jedna losowa krowe
-		money += cows.money(); //zwraca przychody minus koszty utrzymania
-		cout << cows << endl; 
-		cout << "Pieniazki gospodarstwa: " << money << endl << endl;  
-	}
-	cows.sell_all();
-	cout << cows << endl << endl;
-	*/
-	
 	}
 
 	return 0;
 	
+}
+
+int isCorrect(int range){
+
+	int number;
+
+	while(number > range || number <= 0){
+
+		cin >> number;
+
+		if (cin.fail() || number > range || number <= 0){
+
+			cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
+			cin.clear();
+			cin.ignore(1024, '\n');
+
+		}	
+
+	}
+
+	return number;
+
 }
 
 void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs)
@@ -117,7 +88,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	if(random == marten && rabbits.size()>0)
 	{
 		a = (rand()%10)+3 ;
-		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
+		dogs[0]->productiveness() > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		rabbits.attack(kills);
 
 		cout << "Atak kuny! Z Twojego stadka pozostało " << kills << " królików." << endl ;
@@ -125,14 +96,14 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(!dogs[0]->protect())
 		{
 			cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " królików." << endl ;
-			dogs.attack(1);
+			dogs.sell(1);
 		}
 	}
 
 	if(random == bat && cows.size()>0)
 	{
 		a = (rand()%5)+1;
-		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
+		dogs[0]->productiveness() > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		cows.attack(kills);
 
 		cout << "Przyleciały krwiożercze nietoperze. Wyssały krew z " << kills << " Twoich krów." << endl ;
@@ -141,7 +112,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	if(random == wolf && pigs.size()>0)
 	{
 		a = (rand()%5)+1;
-		dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
+		dogs[0]->productiveness() > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 		pigs.attack(kills);
 
 		cout << "W nocy przybiegły wilki, pożerając " << kills << " Twoich świń." << endl ;
@@ -149,7 +120,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(!dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " świń." << endl ;
-				dogs.attack(1);
+				dogs.sell(1);
 			}
 	}
 
@@ -161,7 +132,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(n == 0 && sheeps.size()>0) //Lis je owce
 		{
 			a = (rand()%7)+1;
-			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
+			dogs[0]->productiveness() > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			sheeps.attack(kills); // przepraszam jeszcze raz xD
 
 			cout << "W nocy przybiegł lis chytrusek i zagryzł " << kills << " Twoich owiec." << endl ;
@@ -169,14 +140,14 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(!dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " owiec." << endl ;
-				dogs.attack(1);
+				dogs.sell(1);
 			}
 		}
 
 		if(n == 1 && chickens.size()>0) // Lis je kury
 		{
-			a = rand()%7)+1;
-			dogs[0]->productiveness(); > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
+			a = (rand()%7)+1;
+			dogs[0]->productiveness() > a ? kills=0 : kills = a - dogs[0]->productiveness() ;
 			chickens.attack(kills);
 
 			cout << "W nocy przybiegł lis chytrusek i zjadł " << kills << " Twoich kur." << endl ;
@@ -184,7 +155,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(!dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " kur." << endl ;
-				dogs.attack(1);
+				dogs.sell(1);
 			}
 		}
 	}
@@ -195,7 +166,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		
 		if(dogs.size()>=3)
 		{
-			dogs.attack(3);
+			dogs.sell(3);
 			cout << "Pod osłoną nocy przybył złodziej, jednak Twoje trzy dzielne psy poświęciły się dla obrony gospodarstwa. Reszta zwierząt może spać spokojnie." << endl ;
 		} else
 	
@@ -291,21 +262,24 @@ int start(){
 
 }
 
-void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
 
-	//bool quit=1;
+	int quit=1;
 
-	int option;
+	int option=0;
 
-	int quantity=1;
+	int quantity=1000;
 
-	int number;
+	int number=0;
 
 	Animal * tab[quantity];
+
+
 
 	/*while(quit==1){
 
 */
+	do{
 
 	clear();
 
@@ -315,21 +289,7 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 	cout << "[2] Sprzedać zwierzynę." << endl << endl;
 
-	cout << "[3] Sprzedać produkty." << endl << endl;
-
-	while(option > 3 || option <= 0){
-
-		cin >> option;
-
-		if (cin.fail() || option > 3 || option <= 0){
-
-			cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-			cin.clear();
-			cin.ignore(1024, '\n');
-
-		}	
-
-	}
+	option=isCorrect(2);
 
 	clear();
 
@@ -353,58 +313,50 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 		cout << "[7] Świnie" << endl;
 
-		while(number > 7 || number <= 0){
-
-		cin >> number;
-
-			if (cin.fail() || number > 7 || number <= 0){
-
-				cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-				cin.clear();
-				cin.ignore(1024, '\n');
-
-			}	
-
-		}
+		number = isCorrect(7);
 
 		switch(number){
 
 			case 1:
 
+			clear();
 			cout << "Liczba Twoich psów: " << dogs.size() << endl;
-			cout << "Cena psa: 800" << endl;
-			cout << "Ile psów chcesz kupić?" << endl;
+			cout << "Cena psa: " << Animal::_buy_dog << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_dog << endl;
+			cout << "Ile psów chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_dog) << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(1000);
 
-				cin >> quantity;
+			if(quantity*Animal::_buy_dog<=money){
 
-				if (cin.fail() || quantity > 50 || quantity <= 0){
+				if (quantity==1){
 
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Dog(quantity);
+					dogs.add(pAnimal);
 
-				}	
+				}
 
-			}
+				else{
 
-			if (quantity=1){
+					for(int i=0; i<quantity; i++){
 
-				Animal * pAnimal = new Dog(quantity);
-				dogs.add(pAnimal);
+						Animal * pAnimal = new Dog(i);
+						tab[i] = pAnimal;
+
+					}
+
+					dogs.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_dog;
 
 			}
 
 			else{
 
-				for(int i=0; i<quantity; i++){
-
-					Animal * pAnimal = new Dog(i);
-					tab[i] = pAnimal; 
-				}
-
-				dogs.add(tab, quantity);
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
 
 			}
 
@@ -412,20 +364,44 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 			case 2:
 
-			cout << "Liczba Twoich krów: " << dogs.size() << endl;
-			cout << "Ile krów chcesz kupić?" << endl;
+			clear();
+			cout << "Liczba Twoich krów: " << cows.size() << endl;
+			cout << "Cena krowy: " << Animal::_buy_cow << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_cow << endl;
+			cout << "Ile krów chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_cow) << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(1000);
 
-				cin >> quantity;
+			if(quantity*Animal::_buy_cow<=money){
 
-				if (cin.fail() || quantity > 50 || quantity <= 0){
+				if (quantity==1){
 
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(cow,quantity);
+					cows.add(pAnimal);
 
 				}
+
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(cow,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					cows.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_cow;
+
+			}
+
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
 
 			}
 
@@ -433,20 +409,44 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 			case 3:
 
-			cout << "Liczba Twoich królików: " << dogs.size() << endl;
-			cout << "Ile królików chcesz kupić?" << endl;
+			clear();
+			cout << "Liczba Twoich królików: " << rabbits.size() << endl;
+			cout << "Cena królika: " << Animal::_buy_rabbit << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_rabbit << endl;
+			cout << "Ile królików chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_rabbit) << endl;
 
-			while(quantity > 200 || quantity <= 0){
+			quantity=isCorrect(1000);
 
-				cin >> quantity;
+			if(quantity*Animal::_buy_rabbit<=money){
 
-				if (cin.fail() || quantity > 200 || quantity <= 0){
+				if (quantity==1){
 
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(rabbit,quantity);
+					rabbits.add(pAnimal);
 
 				}
+
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(rabbit,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					rabbits.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_rabbit;
+
+			}
+
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
 
 			}
 
@@ -454,20 +454,44 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 			case 4:
 
-			cout << "Liczba Twoich owiec: " << dogs.size() << endl;
-			cout << "Ile owiec chcesz kupić?" << endl;
+			clear();
+			cout << "Liczba Twoich owiec: " << sheeps.size() << endl;
+			cout << "Cena owiec: " << Animal::_buy_sheep << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_sheep << endl;
+			cout << "Ile owiec chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_sheep) << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(1000);
 
-				cin >> quantity;
+			if(quantity*Animal::_buy_sheep<=money){
 
-				if (cin.fail() || quantity > 50 || quantity <= 0){
+				if (quantity==1){
 
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(sheep,quantity);
+					sheeps.add(pAnimal);
 
 				}
+
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(sheep,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					sheeps.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_sheep;
+
+			}
+
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
 
 			}
 
@@ -475,64 +499,139 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 			
 			case 5:
 
-			cout << "Liczba Twoich kurczaków: " << dogs.size() << endl;
-			cout << "Ile kurczaków chcesz kupić?" << endl;
+			clear();
+			cout << "Liczba Twoich kurczaków: " << chickens.size() << endl;
+			cout << "Cena kurczaka: " << Animal::_buy_chicken << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_chicken << endl;
+			cout << "Ile kurczaków chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_chicken) << endl;
 
-			while(quantity > 200 || quantity <= 0){
+			quantity=isCorrect(1000);
 
-				cin >> quantity;
+			if(quantity*Animal::_buy_chicken<=money){
 
-				if (cin.fail() || quantity > 200 || quantity <= 0){
+				if (quantity==1){
 
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(chicken,quantity);
+					chickens.add(pAnimal);
 
 				}
 
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(chicken,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					chickens.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_chicken;
+
 			}
 
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
+
+			}
+
+
 			break;
-		
+
 			case 6:
+		
+			clear();
+			cout << "Liczba Twoich koni: " << horses.size() << endl;
+			cout << "Cena konia: " << Animal::_buy_horse << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_horse << endl;
+			cout << "Ile koni chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_horse) << endl;
 
-			cout << "Liczba Twoich koni: " << dogs.size() << endl;
-			cout << "Ile koni chcesz kupić?" << endl;
+			quantity=isCorrect(1000);
 
-			while(quantity > 50 || quantity <= 0){
+			if(quantity*Animal::_buy_horse<=money){
 
-				cin >> quantity;
+				if (quantity==1){
 
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(horse,quantity);
+					horses.add(pAnimal);
 
 				}
 
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(horse,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					horses.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_horse;
+
 			}
+
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
+
+			}
+
 
 			break;
-			
+
 			case 7:
+			
+			clear();
+			cout << "Liczba Twoich świń: " << pigs.size() << endl;
+			cout << "Cena świni: " << Animal::_buy_pig << endl;
+			cout << "Koszt utrzymania: " << Animal::costs_pig << endl;
+			cout << "Ile świń chcesz kupić? Stać Cię na: " << floor(money/Animal::_buy_pig) << endl;
 
-			cout << "Liczba Twoich świń: " << dogs.size() << endl;
-			cout << "Ile świń chcesz kupić?" << endl;
+			quantity=isCorrect(1000);
 
-			while(quantity > 50 || quantity <= 0){
+			if(quantity*Animal::_buy_pig<=money){
 
-				cin >> quantity;
+				if (quantity==1){
 
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
+					Animal * pAnimal = new Animal(pig,quantity);
+					pigs.add(pAnimal);
 
 				}
 
+				else{
+
+					for(int i=0; i<quantity; i++){
+
+						Animal * pAnimal = new Animal(pig,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					pigs.add(tab, quantity);
+
+				}
+
+				money-=quantity*Animal::_buy_pig;
+
 			}
+
+			else{
+
+				cout << "Nie masz wystarczająco pieniędzy." << endl;
+				pause();
+
+			}
+
 
 			break;
 			
@@ -558,190 +657,96 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 		cout << "[7] Świnie" << endl;
 
-		while(number > 7 || number <= 0){
-
-		cin >> number;
-
-			if (cin.fail() || number > 7 || number <= 0){
-
-				cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-				cin.clear();
-				cin.ignore(1024, '\n');
-
-			}	
-
-		}
+		number=isCorrect(7);
 
 		switch(number){
 
 			case 1:
 
+			clear();
 			cout << "Liczba Twoich psów: " << dogs.size() << endl;
 			//cout << "Cena sprzedaży Twoich psów: " << Animal.sell() << endl;
 			cout << "Ile psów chcesz sprzedać?" << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(dogs.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}	
-
-			}
-
-			if (quantity=1){
-
-				Animal * pAnimal = new Dog(quantity);
-				dogs.add(pAnimal);
-
-			}
-
-			else{
-
-				for(int i=0; i<quantity; i++){
-
-					Animal * pAnimal = new Dog(i);
-					tab[i] = pAnimal; 
-				}
-
-				dogs.add(tab, quantity);
-
-			}
+			money+=dogs.sell(quantity);
 
 			break;
 
 			case 2:
 
+			clear();
 			cout << "Liczba Twoich krów: " << dogs.size() << endl;
 			//cout << "Cena sprzedaży Twoich krów: " << Animal.sell() << endl;
 			cout << "Ile krów chcesz sprzedać?" << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(cows.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=cows.sell(quantity);
 
 			break;
 
 			case 3:
 
-			cout << "Liczba Twoich królików: " << dogs.size() << endl;
+			clear();
+			cout << "Liczba Twoich królików: " << rabbits.size() << endl;
 			//cout << "Cena sprzedaży Twoich królików: " << Animal.sell() << endl;
 			cout << "Ile królików chcesz sprzedać?" << endl;
 
-			while(quantity > 200 || quantity <= 0){
+			quantity=isCorrect(rabbits.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 200 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=rabbits.sell(quantity);
 
 			break;
 
 			case 4:
 
-			cout << "Liczba Twoich owiec: " << dogs.size() << endl;
+			clear();
+			cout << "Liczba Twoich owiec: " << sheeps.size() << endl;
 			//cout << "Cena sprzedaży Twoich owiec: " << Animal.sell() << endl;
 			cout << "Ile owiec chcesz sprzedać?" << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(sheeps.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=sheeps.sell(quantity);
 
 			break;
 			
 			case 5:
 
-			cout << "Liczba Twoich kurczaków: " << dogs.size() << endl;
+			clear();
+			cout << "Liczba Twoich kurczaków: " << chickens.size() << endl;
 			//cout << "Cena sprzedaży Twoich kurczaków: " << Animal.sell() << endl;
 			cout << "Ile kurczaków chcesz sprzedać?" << endl;
 
-			while(quantity > 200 || quantity <= 0){
+			quantity=isCorrect(chickens.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 200 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=chickens.sell(quantity);
 
 			break;
 		
 			case 6:
 
-			cout << "Liczba Twoich koni: " << dogs.size() << endl;
+			clear();
+			cout << "Liczba Twoich koni: " << horses.size() << endl;
 			cout << "Ile koni chcesz sprzedać?" << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(horses.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=horses.sell(quantity);
 
 			break;
 			
 			case 7:
 
-			cout << "Liczba Twoich świń: " << dogs.size() << endl;
+			clear();
+			cout << "Liczba Twoich świń: " << pigs.size() << endl;
 			cout << "Ile świń chcesz sprzedać?" << endl;
 
-			while(quantity > 50 || quantity <= 0){
+			quantity=isCorrect(pigs.size());
 
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
+			money+=pigs.sell(quantity);
 
 			break;
 			
@@ -749,203 +754,114 @@ void menu(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, H
 
 		break;
 
-		case 3:
-
-		cout << "Które produkty chcesz sprzedać?" << endl;
-
-		cout << "[1] Jajka" << endl;
-
-		cout << "[2] Mleko" << endl;
-
-		cout << "[3] Mięso" << endl;
-
-		cout << "[4] Wełnę" << endl;
-
-		while(number > 4 || number <= 0){
-
-		cin >> number;
-
-			if (cin.fail() || number > 4 || number <= 0){
-
-				cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-				cin.clear();
-				cin.ignore(1024, '\n');
-
-			}	
-
-		}
-
-		switch(number){
-
-			case 1:
-
-			cout << "Liczba posiadanych jajek: " << chickens.assets() << endl;
-			//cout << "Cena sprzedaży jajek: " << chicken.prod_price() << endl;
-			cout << "Ile jajek chcesz sprzedać?" << endl;
-
-			while(quantity > 1000 || quantity <= 0){
-
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 1000 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}	
-
-			}
-
-			if (quantity=1){
-
-				Animal * pAnimal = new Dog(quantity);
-				dogs.add(pAnimal);
-
-			}
-
-			else{
-
-				for(int i=0; i<quantity; i++){
-
-					Animal * pAnimal = new Dog(i);
-					tab[i] = pAnimal; 
-				}
-
-				dogs.add(tab, quantity);
-
-			}
-
-			break;
-
-			case 2:
-
-			cout << "Liczba posiadanego mleka: " << dogs.size() << endl;
-			//cout << "Cena sprzedaży mleka: " << cow.sell() << endl;
-			cout << "Ile mleka chcesz sprzedać?" << endl;
-
-			while(quantity > 50 || quantity <= 0){
-
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
-
-			break;
-
-			case 3:
-
-			cout << "Liczba posiadanego mięsa: " << dogs.size() << endl;
-			//cout << "Cena sprzedaży mięsa: " << rabbit.sell() << endl;
-			cout << "Ile mięsa chcesz sprzedać?" << endl;
-
-			while(quantity > 200 || quantity <= 0){
-
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 200 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
-
-			break;
-
-			case 4:
-
-			cout << "Liczba posiadanej wełny: " << dogs.size() << endl;
-			//cout << "Cena sprzedaży wełny: " << sheep.sell() << endl;
-			cout << "Ile wełny chcesz sprzedać?" << endl;
-
-			while(quantity > 50 || quantity <= 0){
-
-				cin >> quantity;
-
-				if (cin.fail() || quantity > 50 || quantity <= 0){
-
-					cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-					cin.clear();
-					cin.ignore(1024, '\n');
-
-				}
-
-			}
-
-			break;	
-					
-		}
-
-		break;
-
 	}
-
-	pause();
 	clear();
-/*
+
 	cout << "Czy chcesz coś jeszcze dzisiaj zrobić?" << endl << endl;
 
-	cout << "[1] TAK" << endl;
-	cout << "[0] NIE" << endl;
+	cout << "[1] Tak" << endl;
+	cout << "[2] Nie" << endl;
 
-	cin >> quit;
+	quit=isCorrect(2);
 
-		if (cin.fail() || option > 1 || option < 0){
-
-			cout << "Podałeś niepoprawną liczbę, spróbuj ponownie." << endl;
-			cin.clear();
-			cin.ignore(1024, '\n');
-
-		}
-*/
 	pause();
+
+	}while(quit==1);
+
 }	
 
-void period(int semestr, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
+void period(double& money, int semestr, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& chickens, Herd& horses, Herd& pigs){
 
 	clear();
 
 	if(semestr>1){
 
+		double income=0;
+
+		
+		income+=dogs.money();
 		dogs.procreation();
+
+		if(dogs.size(0))
+			cout << "Urodziło się: " << dogs.size(0) << " psów" << endl;
+
 		dogs.obsolescence();
 
+
+		income+=cows.money();
 		cows.procreation();
+
+		if(cows.size(0))
+			cout << "Urodziło się: " << cows.size(0) << " krów" << endl;
+
 		cows.obsolescence();
 
+
+		income+=rabbits.money();
 		rabbits.procreation();
+
+		if(rabbits.size(0))
+			cout << "Urodziło się: " << rabbits.size(0) << " królików" << endl;
+
 		rabbits.obsolescence();
 
+
+		income+=sheeps.money();
 		sheeps.procreation();
+
+		if(sheeps.size(0))
+			cout << "Urodziło się: " << sheeps.size(0) << " owiec" << endl;
+
 		sheeps.obsolescence();
 
+
+		income+=chickens.money();
 		chickens.procreation();
+
+		if(chickens.size(0))
+			cout << "Urodziło się: " << chickens.size(0) << " kurczaków" << endl;
+
 		chickens.obsolescence();
 
+
+		income+=horses.money();
 		horses.procreation();
+
+		if(horses.size(0))
+			cout << "Urodziło się: " << horses.size(0) << " koni" << endl;
+
 		horses.obsolescence();
 
+
+		income+=pigs.money();
 		pigs.procreation();
+
+		if(pigs.size(0))
+			cout << "Urodziło się: " << pigs.size(0) << " świń" << endl;
+
 		pigs.obsolescence();
 
-		cout << "Przes ostatnie pół roku:" << endl;
+
+		money+=income;
+
+		cout << "Przez ostatnie pół roku:" << endl;
+
+		if(income>=0)
+			cout << "Do Twojej sakwy wpadło: " << income << " miedziaków" << endl;
+
+		else
+			cout << "Utrzymanie pochłonęło: " << income << " miedziaków" << endl;
+
 		randomIncidents(dogs, cows, rabbits, sheeps, chickens, horses, pigs);
 
+		cout << endl << endl;
 		pause();
+		clear();
 
 	}
 
-	cout << "Drogi Wieśniaku! Oto stan Twojej farmy na " << semestr << " półrocze" << endl << endl;
+	cout << "Drogi Wieśniaku! W Twojej sakwie jest: " << money << " miedziaków." << endl;
+	cout << "Oto stan Twojej farmy na " << semestr << " półrocze." << endl << endl;
 
 	cout << dogs << endl;
 

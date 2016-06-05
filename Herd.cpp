@@ -198,5 +198,3 @@ ostream & operator<<(ostream &os, Herd & h){
 	   ;
 	return os;
 }
-
-									
