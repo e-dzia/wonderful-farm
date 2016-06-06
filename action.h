@@ -804,6 +804,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 					cows.add(tab,cows.size()+1);
 
 					cout << "Twoje stado krów powiększa się o 1." << endl << endl ;
+					pause();
 					
 			}
 	
@@ -816,7 +817,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			else if(m==3)
 			{
 				cout << "Wyjście na dwór późnym wieczorem nie było dobrym pomysłem. Z krzaków wylatuje rój wygłodniałych, krwiożerczych komarów, które nie oszczędzają Ciebie i Twoich zwierząt. Uciekasz szybko do domu i zamawiasz przez internet specyfiki do walki z tymi ohydnymi owadzimi potworkami." << endl ;
-			pause();
+				pause();
 			}
 
 			else if(m==4)
@@ -863,6 +864,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				pause();
 			}
 
+			pause();
+			
 		break;
 
 	}
