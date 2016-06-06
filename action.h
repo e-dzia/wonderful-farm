@@ -808,6 +808,8 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 			
 		}
 
+		break;
+
 		case 3:
 
 			int m; 
