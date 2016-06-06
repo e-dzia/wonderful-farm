@@ -26,7 +26,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(dogs.size()>0 && !dogs[0]->protect())
 		{
 			cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " królików." << endl ;
-			dogs.sell(1);
+			dogs.attack(1);
 		}
 	}
 
@@ -51,7 +51,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(dogs.size()>0 && !dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " świń." << endl ;
-				dogs.sell(1);
+				dogs.attack(1);
 			}
 	}
 
@@ -73,7 +73,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(dogs.size()>0 && !dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " owiec." << endl ;
-				dogs.sell(1);
+				dogs.attack(1);
 			}
 		}
 
@@ -90,7 +90,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		if(dogs.size()>0 && !dogs[0]->protect())
 			{
 				cout << "Twój pies poległ w walce broniąc stada. Udało mu się obronić " << dogs[0]->productiveness() << " kur." << endl ;
-				dogs.sell(1);
+				dogs.attack(1);
 			}
 		}
 	}
@@ -101,7 +101,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 		
 		if(dogs.size()>=3)
 		{
-			dogs.sell(3);
+			dogs.attack(3);
 			cout << "Pod osłoną nocy przybył złodziej, jednak Twoje trzy dzielne psy poświęciły się dla obrony gospodarstwa. Reszta zwierząt może spać spokojnie." << endl ;
 		} else
 	
@@ -154,6 +154,7 @@ void randomIncidents(Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, Herd& 
 	}
 
 }
+
 
 int isCorrect(int range){
 
@@ -786,6 +787,81 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 		case 3:
 
+			int s; 
+			s = 1;
+			if(s==1)
+			{
+				cout << "Siedząc na werandzie zauważyłeś, że po polu biega bezpańska krowa. Postanowiłeś więc ją przygarnąć. Po dwóch godzinach biegania, wykrzykiwania i odgrażania się, udało Ci się złapać niesforne zwierzę." << endl ;
+				
+				for(int i=0; i<(cows.size()+1); i++)
+					{
+
+						Animal * pAnimal = new Animal(cow,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					cows.add(tab,cows.size()+1);
+
+					cout << "Twoje stado krów powiększa się o 1." << endl << endl ;
+					
+			}
+	
+			else if(s==2)
+			{
+				cout << "Przeciągając się leniwie na świeżym powietrzu słyszysz dziwny szelest w niepozamiatanych na podwórku liściach (przy okazji mógłbyś się zająć trochę sprzątaniem). Po chwili Twoim oczom ukazuje się mały jeżyk Tuptuś, który spokojnie spogląda na Ciebie i idzie tuptać dalej." << endl ;
+				pause();
+			}
+
+			else if(s==3)
+			{
+				cout << "Wyjście na dwór późnym wieczorem nie było dobrym pomysłem. Z krzaków wylatuje rój wygłodniałych, krwiożerczych komarów, które nie oszczędzają Ciebie i Twoich zwierząt. Uciekasz szybko do domu i zamawiasz przez internet specyfiki do walki z tymi ohydnymi owadzimi potworkami." << endl ;
+			pause();
+			}
+
+			else if(s==4)
+			{
+				cout << "Przy okazji sprawdzasz skrzynkę pocztową. Znajdujesz list, w którym zostajesz poinformowany o śmierci dalekiego wujka z Ameryki. Nie kojarzyłeś nawet jego imienia, ale okazuje się, że dostajesz w spadku okrągłą sumkę." << endl ;
+
+				money+=1000; 
+		 
+				cout << "Do Twojego majątku wpływa 1000 miedziaków." << endl ;
+				pause();
+			}
+
+			else if(s==5)
+			{
+				cout << "W to leniwe popołudnie zasypiasz na werandzie... Jednak coś nie daje Ci spokoju, ocierając się ciągle o Twoją nogę. Patrzysz w dół i spostrzegasz wesołego kundelka. Jego oczy mówią: 'Przygarnij mnie', nie masz więc serca zostawić go na pastwę losu." << endl ;
+
+				for(int i=0; i<(dogs.size()+1); i++)
+					{
+
+						Animal * pAnimal = new Dog(dog,i);
+						tab[i] = pAnimal; 
+
+					}
+
+					dogs.add(tab,cows.size()+1);
+
+				cout << "Stado Twoich psów powiększa się o 1." << endl ;
+				pause();
+			}
+
+			else if(s==6 && pigs.size()>0)
+			{
+				cout << "Tym razem słodką drzemkę na werandzie przerywa Ci przeraźliwe chrumkanie. Zanim otworzysz oczy i zdążysz zareagować, jedna z Twoich świń z nieukrywaną satysfakcją tratuje ogrodzenie i ucieka." << endl ;
+
+				pigs.attack(1);
+
+				cout << "Stado Twoich świń zmniejsza się o 1." << endl ;
+				pause();
+			}
+
+			else
+			{
+				cout << "Nic nadzwyczajnego nie stało się w tym dniu. Spędziłeś kolejne leniwe popołudnie smacznie drzemiąc." << endl;
+				pause();
+			}
 
 		break;
 
