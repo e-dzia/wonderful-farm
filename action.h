@@ -787,9 +787,9 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 
 		case 3:
 
-			int s; 
-			s = 1;
-			if(s==1)
+			int m; 
+			m = rand()%30;
+			if(m==1)
 			{
 				cout << "Siedząc na werandzie zauważyłeś, że po polu biega bezpańska krowa. Postanowiłeś więc ją przygarnąć. Po dwóch godzinach biegania, wykrzykiwania i odgrażania się, udało Ci się złapać niesforne zwierzę." << endl ;
 				
@@ -807,19 +807,19 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 					
 			}
 	
-			else if(s==2)
+			else if(m==2)
 			{
 				cout << "Przeciągając się leniwie na świeżym powietrzu słyszysz dziwny szelest w niepozamiatanych na podwórku liściach (przy okazji mógłbyś się zająć trochę sprzątaniem). Po chwili Twoim oczom ukazuje się mały jeżyk Tuptuś, który spokojnie spogląda na Ciebie i idzie tuptać dalej." << endl ;
 				pause();
 			}
 
-			else if(s==3)
+			else if(m==3)
 			{
 				cout << "Wyjście na dwór późnym wieczorem nie było dobrym pomysłem. Z krzaków wylatuje rój wygłodniałych, krwiożerczych komarów, które nie oszczędzają Ciebie i Twoich zwierząt. Uciekasz szybko do domu i zamawiasz przez internet specyfiki do walki z tymi ohydnymi owadzimi potworkami." << endl ;
 			pause();
 			}
 
-			else if(s==4)
+			else if(m==4)
 			{
 				cout << "Przy okazji sprawdzasz skrzynkę pocztową. Znajdujesz list, w którym zostajesz poinformowany o śmierci dalekiego wujka z Ameryki. Nie kojarzyłeś nawet jego imienia, ale okazuje się, że dostajesz w spadku okrągłą sumkę." << endl ;
 
@@ -829,7 +829,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				pause();
 			}
 
-			else if(s==5)
+			else if(m==5)
 			{
 				cout << "W to leniwe popołudnie zasypiasz na werandzie... Jednak coś nie daje Ci spokoju, ocierając się ciągle o Twoją nogę. Patrzysz w dół i spostrzegasz wesołego kundelka. Jego oczy mówią: 'Przygarnij mnie', nie masz więc serca zostawić go na pastwę losu." << endl ;
 
@@ -847,7 +847,7 @@ void menu(double& money, Herd& dogs, Herd& cows, Herd& rabbits, Herd& sheeps, He
 				pause();
 			}
 
-			else if(s==6 && pigs.size()>0)
+			else if(m==6 && pigs.size()>0)
 			{
 				cout << "Tym razem słodką drzemkę na werandzie przerywa Ci przeraźliwe chrumkanie. Zanim otworzysz oczy i zdążysz zareagować, jedna z Twoich świń z nieukrywaną satysfakcją tratuje ogrodzenie i ucieka." << endl ;
 
